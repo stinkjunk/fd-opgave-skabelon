@@ -1,0 +1,18 @@
+---
+//@ts-nocheck
+const servicesData = await fetch(
+  "https://frontend-design-theme.netlify.app/api/services"
+).then((response) => response.json());
+---
+
+<ul>
+  {
+    servicesData.services.map((service) => (
+      <li>
+        <h2>{service.title}</h2>
+        <p>{service.description}</p>
+        <a href="#0">{service.buttonText}</a>
+      </li>
+    ))
+  }
+</ul>
