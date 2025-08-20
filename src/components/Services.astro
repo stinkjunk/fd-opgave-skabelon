@@ -1,8 +1,7 @@
 ---
 //@ts-nocheck
-const servicesData = await fetch(
-  "https://frontend-design-theme.netlify.app/api/services"
-).then((response) => response.json());
+import servicesData from "../data/services.json";
+console.log(servicesData);
 ---
 
 <ul>
@@ -16,3 +15,10 @@ const servicesData = await fetch(
     ))
   }
 </ul>
+
+<style>
+  @layer components {
+    li {
+    }
+  }
+</style>

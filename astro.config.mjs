@@ -7,8 +7,8 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: "viewport",
   },
-  experimental: {
-    svg: true,
-    clientPrerender: true,
+  image: {
+    responsiveStyles: true,
+    layout: "constrained",
   },
 });

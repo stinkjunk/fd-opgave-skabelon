@@ -1,0 +1,27 @@
+---
+import type { ImageMetadata } from "astro";
+import { getImage } from "astro:assets";
+const { imagePath, class: className } = Astro.props;
+
+const importedImage = `/src/assets/images/${imagePath}`;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/*.{jpeg,jpg,png,gif,webp}"
+);
+if (!images[importedImage])
+  throw new Error(
+    `"${importedImage}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif,webp}"`
+  );
+
+const optimizedBackground = await getImage({
+  src: images[importedImage](),
+  format: "webp",
+});
+---
+
+<section
+  style={`background-image: url(${optimizedBackground.src});`}
+  class={className}
+>
+  <slot />
+</section>
