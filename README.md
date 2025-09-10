@@ -13,7 +13,7 @@ Dokumentationen til anvendelsen af dataene finder du på: [https://frontend-desi
 Her er et eksempel på, hvordan du kan bruge dataene i dine Astro-komponenter:
 
 ```astro
-import employees from "../data/employees.json";
+import employees from "@data/employees.json";
 
 console.log(employees);
 ```
@@ -74,7 +74,7 @@ Du kan tilføje ekstra styling via `class` eller `style`-props, og alt indhold m
 Du kan også importere SVG-ikoner direkte i dine komponenter, hvis du ønsker mere kontrol eller styling:
 
 ```astro
-import Checkmark from "../icons/checkmark.svg";
+import Checkmark from "@icons/checkmark.svg";
 
 <Checkmark width={32} height={32} class="my-icon" />
 ```
