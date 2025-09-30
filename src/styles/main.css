@@ -1,4 +1,4 @@
-@layer reset, global, components, overrides;
+/* @layer reset, global, components, overrides; -> Rykket til Layout.astro */
 
 @import url("./reset.css") layer(reset);
 @import url("./global.css") layer(global);
