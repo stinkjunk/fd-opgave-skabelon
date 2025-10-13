@@ -1,5 +1,6 @@
 ---
 import "@styles/main.css";
+const { title } = Astro.props;
 ---
 
 <html lang="en">
@@ -8,14 +9,73 @@ import "@styles/main.css";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>DIN TITEL HER. MÅSKE SOM PROP?</title>
+    <title>{title} - AskExperts</title>
     <style is:inline>
       @layer reset, global, components, overrides;
+      header {
+        display: flex;
+        padding: 38px;
+        /* justify-content: space-between; */
+        justify-content: center;
+        background-color: #1b1b1b;
+        color: var(--secondary02);
+        align-items: center;
+
+        .inner {
+          display: flex;
+          width: var(--headerInnerWidth);
+          max-width: var(--headerInnerWidth);
+          justify-content: space-between;
+          align-items: center;
+          flex-shrink: 0;
+          .title {
+            font-size: var(--step-1);
+            margin: 0;
+          }
+          ul.menu-bar {
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-l);
+            li {
+              list-style: none;
+              a {
+                color: var(--secondary02);
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
     </style>
   </head>
   <body>
+    <header>
+      <div class="inner">
+        <a class="title" href="">
+          AskExperts <!-- Titel Styling -->
+        </a>
+        <ul class="menu-bar">
+          <li>
+            <a href="#"> Home </a>
+          </li>
+          <li>
+            <a href="#"> Case Study </a>
+          </li>
+          <li>
+            <a href="#"> Team </a>
+          </li>
+          <li>
+            <a href="#"> About </a>
+          </li>
+        </ul>
+        <a href="#" class="cta2">Login</a>
+      </div>
+    </header>
     <slot />
   </body>
+  <footer></footer>
 </html>
 
 <style></style>
