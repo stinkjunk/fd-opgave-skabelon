@@ -26,21 +26,52 @@ import CEOImage from "@assets/images/ceo.png";
       background-color: var(--primary03);
       /* padding: 2rem; */
       display: grid;
+      .hero-content {
+        color: var(--secondary02);
+      }
     }
   }
   .hero {
     grid-template-columns: subgrid;
     grid-column: span 4;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 30%;
+      left: 0;
+      /* background-color: red; */
+      background-image: url("../icons/pattern.svg");
+      background-size: auto 100%;
+      background-position: right top;
+      background-repeat: no-repeat;
+      width: 9%;
+      height: 30%;
+    }
     img {
       grid-column: 3 / 5;
     }
 
     .hero-content {
       grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-s);
+      padding-right: var(--space-l);
+      a.cta3 {
+        width: 40%;
+        padding: var(--space-xs);
+      }
     }
+
+    /*Services.astro*/
     & > * {
-      /*Services.astro*/
       grid-column: 2 / 4;
+      grid-row: 1;
+    }
+    ul {
+      /* background-color: red !important; */
+      transform: translateY(80%);
     }
   }
 </style>
