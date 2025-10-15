@@ -4,6 +4,7 @@
 
 :root {
   --headerInnerWidth: 85vw;
+  --padGrid: minmax(20px, 0.5fr) 1fr 1fr minmax(20px, 0.5fr);
 
   /*farvevariabler*/
   --primary01: #ffcc4a;
@@ -64,7 +65,8 @@ h4,
 }
 
 .cta1,
-.cta2 {
+.cta2,
+.cta3 {
   border-radius: 1000px;
   padding: var(--space-2xs) var(--space-s);
   /* font-size: var(--step-0); */
@@ -86,6 +88,16 @@ h4,
     color: var(--primary03);
     border: 1px solid var(--primary03);
   }
+}
+.cta3 {
+  background-color: var(--secondary02);
+  color: #353535;
+  &:hover {
+    background-color: transparent;
+    color: var(--secondary01);
+    border: 1px solid var(--secondary01);
+  }
+  border: 1px solid var(--secondary01);
 }
 
 .cta2 {
