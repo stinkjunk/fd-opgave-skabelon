@@ -21,7 +21,8 @@ console.log(servicesData);
 <style>
   @layer components {
     ul {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
       padding: 0;
       gap: var(--space-m);
 
@@ -33,7 +34,7 @@ console.log(servicesData);
         flex-direction: column;
         /* justify-content: space-between; */
         /* gap: var(--space-xs); */
-        height: 45%;
+        /* height: 45%; */
         color: var(--secondary02);
 
         border-radius: 20px;

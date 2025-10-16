@@ -5,4 +5,25 @@ import Hero from "@components/Hero.astro";
 
 <Layout title="Home">
   <Hero />
+  <section class="toExpect">
+    <div class="image"></div>
+    <div class="text">
+      <p class="caps">We'll work with you</p>
+      <h1>What To Expect</h1>
+      <p>
+        Our collaboration is built on transparency, efficiency, and measurable
+        results. Together, we create strategies tailored to your unique needs
+        and goals.
+      </p>
+    </div>
+  </section>
 </Layout>
+
+<style>
+
+  .toExpect {
+    margin-top: 15%;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+  }
+</style>

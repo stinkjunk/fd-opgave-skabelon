@@ -71,6 +71,10 @@ h2 {
   font-size: var(--step-1);
 }
 
+.caps {
+  text-transform: uppercase;
+}
+
 .cta1,
 .cta2,
 .cta3 {
@@ -112,5 +116,18 @@ h2 {
   color: var(--primary03);
   &:hover {
     background-color: #ffe5a2;
+  }
+}
+
+/*image wrapper:*/
+.wrapper:has(img) {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  & > img {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
   }
 }
