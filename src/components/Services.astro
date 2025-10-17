@@ -64,7 +64,8 @@ console.log(servicesData);
     ul {
       display: flex;
       flex-direction: column;
-      padding: var(--space-s);
+      padding: 0;
+      margin: var(--space-xl) 0;
 
       border-radius: 20px;
       /* border: 1px solid rgba(255, 255, 255, 0.2);
@@ -73,16 +74,35 @@ console.log(servicesData);
       width: 100%; */
       gap: 0;
 
-      h2, p{
-        color: var(--primary03);
-      }
-
       li {
         padding: var(--space-xs);
         background: transparent;
         border: none;
         backdrop-filter: none;
+        border-radius: 0;
 
+        h2,
+        p {
+          color: var(--primary03);
+        }
+
+        a.cta3 {
+          max-width: 20ch;
+          padding: var(--space-xs);
+        }
+        &:nth-child(even){
+          > * {
+            text-align: right;
+          }
+          a{
+            margin-left: auto;
+          }
+        }
+        &:not(:first-child) {
+          border-top: 1px solid rgba(0, 0, 0, 0.363);
+          margin-top: var(--space-m);
+
+        }
       }
     }
   }
