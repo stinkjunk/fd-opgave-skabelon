@@ -4,7 +4,7 @@
 
 :root {
   --headerInnerWidth: 85vw;
-  --padGrid: minmax(20px, 0.5fr) 1fr 1fr minmax(20px, 0.5fr);
+  --padGrid: minmax(100px, 0.3fr) 1fr 1fr minmax(100px, 0.3fr);
 
   /*farvevariabler*/
   --primary01: #ffcc4a;
