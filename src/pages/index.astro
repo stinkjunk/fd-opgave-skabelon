@@ -15,15 +15,47 @@ import Hero from "@components/Hero.astro";
         results. Together, we create strategies tailored to your unique needs
         and goals.
       </p>
+      <ul>
+        <li>
+          Collaborate to build actionable strategies that drive sustainable
+          growth and deliver tangible outcomes.
+        </li>
+        <li>
+          Identify opportunities to optimize processes and implement impactful
+          solutions with measurable results.
+        </li>
+      </ul>
     </div>
   </section>
 </Layout>
 
 <style>
-
   .toExpect {
-    margin-top: 15%;
+    margin: 15% 0;
     display: grid;
     grid-template-columns: 1.5fr 1fr;
+    /*aldrig brug ::marker!!*/
+    ul {
+      list-style: none;
+      li:not(:last-child) {
+        margin-bottom: var(--space-s);
+      }
+      li::before {
+        position: absolute;
+        content: "";
+        display: inline-block;
+        height: var(--step-1);
+        
+        aspect-ratio: 1/1;
+        background-color: #4eaf4e;
+        -webkit-mask: url(../icons/checkmark.svg) no-repeat center;
+        mask: url(../icons/checkmark.svg) no-repeat center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        margin-right: 0.5em;
+
+        transform: translateX(-120%) scale(80%);
+      }
+    }
   }
 </style>
