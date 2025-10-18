@@ -1,5 +1,6 @@
 ---
 //@ts-nocheck
+
 import FinancialProjectionsData from "@data/financialProjections.json";
 const projects = FinancialProjectionsData.values;
 
@@ -30,11 +31,11 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
     {
       projects.map((project) => (
         <li class="projectEntry">
-          <h2>{project.title}</h2>
+          <div>
+            <div class="icon" data-icon={project.icon} />
+            <h2>{project.title}</h2>
+          </div>
           <p>{project.description}</p>
-          {/* <a href={project.link.url} class="cta1">
-            {project.link.text}
-          </a> */}
         </li>
       ))
     }
@@ -56,7 +57,8 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
       display: flex;
       justify-content: space-between;
       .text {
-        width: 50vw;
+        width: 40vw;
+
       }
       .navigation {
         margin-top: auto;
@@ -76,34 +78,35 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
             mask-position: center;
             height: 100%;
             width: 100%;
+            transition: all 0.2s ease-in-out;
           }
 
           &#finProj-navBack {
             background-color: var(--primary03);
             .icon {
               background-color: var(--secondary02);
-              transform: scale(70%);
+              transform: scale(50%);
             }
             &:hover {
               background-color: var(--secondary02);
               .icon {
                 background-color: var(--primary03);
-                transform: scale(80%);
+                transform: scale(60%);
               }
             }
             border: 1px solid var(--primary03);
           }
           &#finProj-navNext {
-            background-color: var(--primary01);
+            background-color: #ffc32b;
+
             .icon {
               background-color: var(--primary03);
-
-              transform: scaleX(-100%) scale(70%);
+              transform: scaleX(-100%) scale(50%);
             }
             &:hover {
               background-color: #ffe5a2;
               .icon {
-                transform: scaleX(-100%) scale(80%);
+                transform: scaleX(-100%) scale(60%);
               }
             }
           }
@@ -131,6 +134,7 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
     }
 
     ul.scroller {
+      margin-top: var(--space-m);
       padding: 0;
       grid-row: 2;
       grid-column: 1 / 5;
@@ -139,26 +143,50 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
       grid-auto-columns: max-content;
       overflow-x: hidden;
       overflow-y: hidden;
-      height: 40vh;
+      min-height: 40vh;
       gap: var(--space-m);
 
       li.projectEntry {
-        background-color: var(--secondary01);
+        background-color: var(--secondary02);
         --textcol1: var(--primary03);
         border-radius: 20px;
-        height: 80%;
+        height: 85%;
         list-style: none;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        /* justify-content: space-between; */
         padding: var(--space-m);
         gap: var(--space-s);
         transition: all 0.2s ease-in-out;
         cursor: pointer;
+        .icon {
+          background-color: var(--primary03);
+          height: var(--space-m-l);
+          aspect-ratio: 1 / 1;
+          margin-bottom: var(--space-s);
+          mask-repeat: no-repeat;
+          mask-size: contain;
+          mask-position: center;
+          &[data-icon="cal"] {
+            mask-image: url(../icons/cal.svg);
+          }
+          &[data-icon="card"] {
+            mask-image: url(../icons/card.svg);
+          }
+          &[data-icon="law"] {
+            mask-image: url(../icons/law.svg);
+          }
+          &[data-icon="money"] {
+            mask-image: url(../icons/money.svg);
+          }
+        }
         &.active {
           background-color: var(--primary03);
           --textcol1: var(--secondary02);
           height: 100%;
+          .icon {
+            background-color: var(--primary01);
+          }
         }
       }
     }
@@ -203,7 +231,13 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
         }
       }
       ul.scroller {
+        height: 100%;
+        min-height: auto;
         li.projectEntry {
+          /*           opacity: 0;
+          &.active {
+            opacity: 1;
+          } */
           p {
             margin-bottom: var(--space-m);
           }
@@ -252,13 +286,6 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
     marginToApply = measurestick.clientWidth;
     let widthToApply;
 
-    function setNavPosition() {
-      const scrollerRect = scroller.getBoundingClientRect();
-      const navigationGoTo =
-        scrollerRect.top + window.scrollY + scroller.clientHeight * 0.9;
-      navigation.style.top = navigationGoTo + "px";
-    }
-
     if (window.innerWidth < 660) {
       widthToApply = innerMeasurestick.clientWidth * 2;
       scroller.style.gap = marginToApply + "px";
@@ -303,12 +330,21 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
     });
   }
 
+  function setNavPosition() {
+    const scrollerRect = scroller.getBoundingClientRect();
+    const navigationGoTo =
+      scrollerRect.top + window.scrollY + scroller.clientHeight * 0.9;
+    navigation.style.top = navigationGoTo + "px";
+  }
+
   projectEntries.forEach((projectEntry, i) => {
     if (i === 0) {
       projectEntry.classList.add("active");
     }
   });
-
+  requestAnimationFrame(() => {
+    setNavPosition();
+  });
   window.addEventListener("resize", applyEntryWidth);
   applyEntryWidth();
 </script>

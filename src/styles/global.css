@@ -83,13 +83,12 @@ h2 {
 
 .caps {
   text-transform: uppercase;
+
   /* color: var(--primary03); */
 }
 
-p:not(.caps),
-p:not(.title),
-li:not(.caps),
-li:not(.title) {
+p:not(.caps):not(.title),
+li:not(.caps):not(.title) {
   color: var(--textcol1);
 }
 
@@ -191,5 +190,3 @@ li:not(.title) {
     border-radius: 20px;
   }
 }
-
-
