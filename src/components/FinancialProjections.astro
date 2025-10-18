@@ -5,118 +5,212 @@ const projects = FinancialProjectionsData.values;
 
 console.log("FinancialProjectionsData: ", FinancialProjectionsData);
 ---
-  <section class="projections">
-    <div class="panel">
-      <div class="text">
-        <h1>{FinancialProjectionsData.title}</h1>
-        <p>
-          {FinancialProjectionsData.subtitle}
-        </p>
-      </div>
-      <div class="navigation">
-        <button id="finProj-navBack">
-          <div class="icon"></div>
-        </button>
-        <button id="finProj-navNext">
-          <div class="icon"></div>
-        </button>
-      </div>
+
+<section class="projections">
+  <div class="panel">
+    <div class="text">
+      <h1>{FinancialProjectionsData.title}</h1>
+      <p>
+        {FinancialProjectionsData.subtitle}
+      </p>
     </div>
-<div class="measurestick"><!-- really hacky!!1! --></div>
-<div class="scroller">
-  <!-- <h1>test</h1> -->
-  <ul>
-    {projects.map((project) => (
-      <li>
-        <h2>{project.title}</h2>
-        <p>{project.description}</p>
-        <a href={project.link.url} class="cta1">
-          {project.link.text}
-        </a>
-      </li>
-    ))}
+    <div class="navigation">
+      <button id="finProj-navBack">
+        <div class="icon"></div>
+      </button>
+      <button id="finProj-navNext">
+        <div class="icon"></div>
+      </button>
+    </div>
+  </div>
+  <div class="measurestick"><!-- really hacky!!1! --></div>
+  <div class="measurestickInner"></div>
+  <ul class="scroller">
+    <!-- <h1>test</h1> -->
+    {
+      projects.map((project) => (
+        <li class="projectEntry">
+          <h2>{project.title}</h2>
+          <p>{project.description}</p>
+          {/* <a href={project.link.url} class="cta1">
+            {project.link.text}
+          </a> */}
+        </li>
+      ))
+    }
   </ul>
-</div>
-  </section>
+</section>
 
 <style>
-    .projections {
-      padding: var(--sectionPad);
-      background-color: var(--secondary01);
-      grid-column: 1 / 5;
-      display: grid;
-      grid-template-columns: subgrid;
-      grid-template-rows: auto;
-      .panel {
-        grid-row: 1;
-        grid-column: 2 / 4;
+  .projections {
+    overflow-x: hidden;
+    padding: var(--sectionPad);
+    background-color: var(--secondary01);
+    grid-column: 1 / 5;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: auto;
+    .panel {
+      grid-row: 1;
+      grid-column: 2 / 4;
+      display: flex;
+      justify-content: space-between;
+      .text {
+        width: 50vw;
+      }
+      .navigation {
+        margin-top: auto;
         display: flex;
-        justify-content: space-between;
-        .text {
-          width: 50vw;
-        }
-        .navigation {
-          margin-top: auto;
-          display: flex;
-          gap: var(--space-2xs);
-          button {
-            /* background-color: red; */
-            width: var(--space-l-xl);
-            padding: 10%;
-            aspect-ratio: 1 / 1;
-            border-radius: 1000px;
+        gap: var(--space-2xs);
+        button {
+          /* background-color: red; */
+          width: var(--space-l-xl);
+          padding: 10%;
+          aspect-ratio: 1 / 1;
+          border-radius: 1000px;
 
+          .icon {
+            mask-image: url(../icons/arrow-left.svg);
+            mask-repeat: no-repeat;
+            mask-size: contain;
+            mask-position: center;
+            height: 100%;
+            width: 100%;
+          }
+
+          &#finProj-navBack {
+            background-color: var(--primary03);
             .icon {
-              mask-image: url(../icons/arrow-left.svg);
-              mask-repeat: no-repeat;
-              mask-size: contain;
-              mask-position: center;
-              height: 100%;
-              width: 100%;
+              background-color: var(--secondary02);
+              transform: scale(80%);
             }
-
-            &#finProj-navBack {
+          }
+          &#finProj-navNext {
+            background-color: var(--primary01);
+            .icon {
               background-color: var(--primary03);
-              .icon {
-                background-color: var(--secondary02);
-                transform: scale(80%);
-              }
-            }
-            &#finProj-navNext {
-              background-color: var(--primary01);
-              .icon {
-                background-color: var(--primary03);
 
-                transform: scaleX(-100%) scale(80%);
-              }
+              transform: scaleX(-100%) scale(80%);
             }
           }
         }
       }
-
-      .scroller {
-        grid-row: 2;
-        grid-column: 1 / 5;
-        display: grid;
     }
-  /* .measurestick {
-    height: 10px;
-    background-color: red;
-  } */
 
+    .measurestick {
+      height: 10px;
+      background-color: red;
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .measurestickInner {
+      height: 10px;
+      background-color: blue;
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .measurestick,
+    .measurestickInner {
+      /*toggle comment for testing*/
+      height: 0px !important;
+    }
+
+    ul.scroller {
+      padding: 0;
+      grid-row: 2;
+      grid-column: 1 / 5;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      height: 40vh;
+      gap: var(--space-m);
+
+      li.projectEntry {
+        background-color: var(--secondary01);
+        --textcol1: var(--primary03);
+        border-radius: 20px;
+        height: 80%;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: var(--space-m);
+        gap: var(--space-s);
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        &.active {
+          background-color: var(--primary03);
+          --textcol1: var(--secondary02);
+          height: 100%;
+        }
+      }
+    }
+  }
 </style>
 
 <script>
+  let activeEntry = 0;
   const scroller = document.querySelector(".scroller") as HTMLElement;
   const measurestick = document.querySelector(".measurestick") as HTMLElement;
+  const innerMeasurestick = document.querySelector(
+    ".measurestickInner"
+  ) as HTMLElement;
+  const projectEntries =
+    document.querySelectorAll<HTMLElement>(".projectEntry");
   // as HTMLElement; så jeg ikke får røde linjer - irriterede mig personligt.
 
-  function applyScrollerMargin() {
+  function applyEntryWidth() {
+    //hvis vindue bredde er mindre end 660:
     const marginToApply = measurestick.clientWidth;
-    scroller.style.marginLeft = marginToApply + "px";
-    // scroller.style.marginRight = marginToApply + "px";
+    let widthToApply;
+
+    if (window.innerWidth < 660) {
+      widthToApply = innerMeasurestick.clientWidth * 2;
+      scroller.style.gap = marginToApply + "px";
+    } else if (window.innerWidth < 880) {
+      widthToApply = innerMeasurestick.clientWidth;
+      scroller.style.removeProperty("gap");
+    } else {
+      widthToApply = (innerMeasurestick.clientWidth * 2) / 3;
+      scroller.style.removeProperty("gap");
+    }
+
+    projectEntries.forEach((projectEntry, i) => {
+      projectEntry.style.width = widthToApply + "px"; //sætter bredden til alle elementer
+      projectEntry.style.marginLeft = i === 0 ? marginToApply + "px" : "0"; //hvis entry er
+      //den første sættes marginToApply til venstres
+      projectEntry.style.marginRight =
+        i === projectEntries.length - 1 ? marginToApply + "px" : "0";
+      //hvis entry er længden - 1 (det sidste) sættes marginToApply til højre
+
+      projectEntry.addEventListener("click", () => {
+        activeEntry = i;
+        console.log("activeEntry: ", activeEntry);
+        projectEntries.forEach((projectEntry, i) => {
+          projectEntry.classList.remove("active");
+          if (i === activeEntry) {
+            projectEntry.classList.add("active");
+            let scrollLeft = projectEntry.offsetLeft - marginToApply;
+            scroller.scrollTo({
+              left: scrollLeft,
+              top: 0,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    });
   }
 
-  window.addEventListener("resize", applyScrollerMargin);
-  applyScrollerMargin();
+  projectEntries.forEach((projectEntry, i) => {
+    if (i === 0) {
+      projectEntry.classList.add("active");
+    }
+  });
+
+  window.addEventListener("resize", applyEntryWidth);
+  applyEntryWidth();
 </script>
