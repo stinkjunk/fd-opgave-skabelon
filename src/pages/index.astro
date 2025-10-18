@@ -30,27 +30,8 @@ import FinancialProjections from "@components/FinancialProjections.astro";
       </ul>
     </div>
   </section>
-  <section class="projections">
-    <div class="panel">
-      <div class="text">
-        <h1>Financial Projections</h1>
-        <p>
-          Financial projections are essential for planning and monitoring a
-          company’s performance. They provide insights into potential revenue,
-          expenses, and profitability over specific periods.
-        </p>
-      </div>
-      <div class="navigation">
-        <button id="finProj-navBack">
-          <div class="icon"></div>
-        </button>
-        <button id="finProj-navNext">
-          <div class="icon"></div>
-        </button>
-      </div>
-    </div>
-    <FinancialProjections />
-  </section>
+
+  <FinancialProjections />
 
   <style>
     .toExpect {
@@ -88,68 +69,6 @@ import FinancialProjections from "@components/FinancialProjections.astro";
         }
       }
     }
-
-    .projections {
-      padding: var(--sectionPad);
-      background-color: var(--secondary01);
-      grid-column: 1 / 5;
-      display: grid;
-      grid-template-columns: subgrid;
-      grid-template-rows: auto;
-      .panel {
-        grid-row: 1;
-        grid-column: 2 / 4;
-        display: flex;
-        justify-content: space-between;
-        .text {
-          width: 50vw;
-        }
-        .navigation {
-          margin-top: auto;
-          display: flex;
-          gap: var(--space-2xs);
-          button {
-            /* background-color: red; */
-            width: var(--space-l-xl);
-            padding: 10%;
-            aspect-ratio: 1 / 1;
-            border-radius: 1000px;
-
-            .icon {
-              mask-image: url(../icons/arrow-left.svg);
-              mask-repeat: no-repeat;
-              mask-size: contain;
-              mask-position: center;
-              height: 100%;
-              width: 100%;
-            }
-
-            &#finProj-navBack {
-              background-color: var(--primary03);
-              .icon {
-                background-color: var(--secondary02);
-                transform: scale(80%);
-              }
-            }
-            &#finProj-navNext {
-              background-color: var(--primary01);
-              .icon {
-                background-color: var(--primary03);
-
-                transform: scaleX(-100%) scale(80%);
-              }
-            }
-          }
-        }
-      }
-
-      .scroller {
-        grid-row: 2;
-        grid-column: 1 / 5;
-        display: grid;
-        /*coy idea*/
-    }
-
     @media (max-width: 880px) {
       .toExpect {
         grid-template-columns: 1fr;

@@ -1,21 +1,109 @@
 ---
 //@ts-nocheck
 import FinancialProjectionsData from "@data/financialProjections.json";
+const projects = FinancialProjectionsData.values;
+
 console.log("FinancialProjectionsData: ", FinancialProjectionsData);
 ---
-
+  <section class="projections">
+    <div class="panel">
+      <div class="text">
+        <h1>{FinancialProjectionsData.title}</h1>
+        <p>
+          {FinancialProjectionsData.subtitle}
+        </p>
+      </div>
+      <div class="navigation">
+        <button id="finProj-navBack">
+          <div class="icon"></div>
+        </button>
+        <button id="finProj-navNext">
+          <div class="icon"></div>
+        </button>
+      </div>
+    </div>
 <div class="measurestick"><!-- really hacky!!1! --></div>
 <div class="scroller">
-  <h1>test</h1>
+  <!-- <h1>test</h1> -->
+  <ul>
+    {projects.map((project) => (
+      <li>
+        <h2>{project.title}</h2>
+        <p>{project.description}</p>
+        <a href={project.link.url} class="cta1">
+          {project.link.text}
+        </a>
+      </li>
+    ))}
+  </ul>
 </div>
+  </section>
 
 <style>
+    .projections {
+      padding: var(--sectionPad);
+      background-color: var(--secondary01);
+      grid-column: 1 / 5;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-template-rows: auto;
+      .panel {
+        grid-row: 1;
+        grid-column: 2 / 4;
+        display: flex;
+        justify-content: space-between;
+        .text {
+          width: 50vw;
+        }
+        .navigation {
+          margin-top: auto;
+          display: flex;
+          gap: var(--space-2xs);
+          button {
+            /* background-color: red; */
+            width: var(--space-l-xl);
+            padding: 10%;
+            aspect-ratio: 1 / 1;
+            border-radius: 1000px;
+
+            .icon {
+              mask-image: url(../icons/arrow-left.svg);
+              mask-repeat: no-repeat;
+              mask-size: contain;
+              mask-position: center;
+              height: 100%;
+              width: 100%;
+            }
+
+            &#finProj-navBack {
+              background-color: var(--primary03);
+              .icon {
+                background-color: var(--secondary02);
+                transform: scale(80%);
+              }
+            }
+            &#finProj-navNext {
+              background-color: var(--primary01);
+              .icon {
+                background-color: var(--primary03);
+
+                transform: scaleX(-100%) scale(80%);
+              }
+            }
+          }
+        }
+      }
+
+      .scroller {
+        grid-row: 2;
+        grid-column: 1 / 5;
+        display: grid;
+    }
   /* .measurestick {
     height: 10px;
     background-color: red;
   } */
-  .scroller {
-  }
+
 </style>
 
 <script>
@@ -26,6 +114,7 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
   function applyScrollerMargin() {
     const marginToApply = measurestick.clientWidth;
     scroller.style.marginLeft = marginToApply + "px";
+    // scroller.style.marginRight = marginToApply + "px";
   }
 
   window.addEventListener("resize", applyScrollerMargin);
