@@ -4,7 +4,9 @@
 
 :root {
   --headerInnerWidth: 85vw;
-  --padGrid: minmax(20px, 0.3fr) 1fr 1fr minmax(20px, 0.3fr);
+  --outerPadding: minmax(20px, 0.3fr);
+  --padGrid: var(--outerPadding) 1fr 1fr var(--outerPadding);
+  --sectionPad: 15% 0;
 
   /*farvevariabler*/
   --primary01: #ffcc4a;
@@ -74,7 +76,6 @@ h1 {
 h1 + p {
   margin-top: var(--space-s);
 }
-
 
 h2 {
   font-size: var(--step-1);
@@ -148,3 +149,47 @@ li:not(.title) {
     min-height: 100%;
   }
 }
+
+/*styled image*/
+.styledImg {
+  position: relative;
+  height: 100%;
+  /* padding: var(--space-m); */
+  margin-right: var(--space-l);
+  img {
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 90%;
+    height: 90%;
+
+    border-radius: 28px;
+  }
+  &::before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    aspect-ratio: 1 / 1;
+    background-image: url(../icons/pattern.svg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+  }
+  &::after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 6%;
+    left: 5%;
+    width: 20%;
+    aspect-ratio: 1 / 0.8;
+
+    background-color: var(--primary02);
+    border-radius: 20px;
+  }
+}
+
+

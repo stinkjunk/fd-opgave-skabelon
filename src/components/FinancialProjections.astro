@@ -1,0 +1,33 @@
+---
+//@ts-nocheck
+import FinancialProjectionsData from "@data/financialProjections.json";
+console.log("FinancialProjectionsData: ", FinancialProjectionsData);
+---
+
+<div class="measurestick"><!-- really hacky!!1! --></div>
+<div class="scroller">
+  <h1>test</h1>
+</div>
+
+<style>
+  /* .measurestick {
+    height: 10px;
+    background-color: red;
+  } */
+  .scroller {
+  }
+</style>
+
+<script>
+  const scroller = document.querySelector(".scroller") as HTMLElement;
+  const measurestick = document.querySelector(".measurestick") as HTMLElement;
+  // as HTMLElement; så jeg ikke får røde linjer - irriterede mig personligt.
+
+  function applyScrollerMargin() {
+    const marginToApply = measurestick.clientWidth;
+    scroller.style.marginLeft = marginToApply + "px";
+  }
+
+  window.addEventListener("resize", applyScrollerMargin);
+  applyScrollerMargin();
+</script>

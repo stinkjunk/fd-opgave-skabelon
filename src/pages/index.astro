@@ -1,12 +1,15 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/Hero.astro";
+import FinancialProjections from "@components/FinancialProjections.astro";
 ---
 
 <Layout title="Home">
   <Hero />
   <section class="toExpect">
-    <div class="image"></div>
+    <div class="styledImg">
+      <img src="/images/toexpect.webp" alt="To Expect" />
+    </div>
     <div class="text">
       <p class="caps">We'll work with you</p>
       <h1>What To Expect</h1>
@@ -27,35 +30,139 @@ import Hero from "@components/Hero.astro";
       </ul>
     </div>
   </section>
-</Layout>
+  <section class="projections">
+    <div class="panel">
+      <div class="text">
+        <h1>Financial Projections</h1>
+        <p>
+          Financial projections are essential for planning and monitoring a
+          company’s performance. They provide insights into potential revenue,
+          expenses, and profitability over specific periods.
+        </p>
+      </div>
+      <div class="navigation">
+        <button id="finProj-navBack">
+          <div class="icon"></div>
+        </button>
+        <button id="finProj-navNext">
+          <div class="icon"></div>
+        </button>
+      </div>
+    </div>
+    <FinancialProjections />
+  </section>
 
-<style>
-  .toExpect {
-    margin: 15% 0;
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    /*aldrig brug ::marker!!*/
-    ul {
-      list-style: none;
-      li:not(:last-child) {
-        margin-bottom: var(--space-s);
-      }
-      li::before {
-        position: absolute;
-        content: "";
-        display: inline-block;
-        height: var(--step-1);
-        
-        aspect-ratio: 1/1;
-        background-color: #4eaf4e;
-        -webkit-mask: url(../icons/checkmark.svg) no-repeat center;
-        mask: url(../icons/checkmark.svg) no-repeat center;
-        -webkit-mask-size: contain;
-        mask-size: contain;
-        margin-right: 0.5em;
+  <style>
+    .toExpect {
+      margin: var(--sectionPad);
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      grid-template-rows: 50vh;
+      /*aldrig brug ::marker!!*/
 
-        transform: translateX(-120%) scale(80%);
+      .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        ul {
+          list-style: none;
+          li:not(:last-child) {
+            margin-bottom: var(--space-s);
+          }
+          li::before {
+            position: absolute;
+            content: "";
+            display: inline-block;
+            height: var(--step-1);
+
+            aspect-ratio: 1/1;
+            background-color: var(--primary02);
+            -webkit-mask: url(../icons/checkmark.svg) no-repeat center;
+            mask: url(../icons/checkmark.svg) no-repeat center;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            margin-right: 0.5em;
+
+            transform: translateX(-120%) scale(80%);
+          }
+        }
       }
     }
-  }
-</style>
+
+    .projections {
+      padding: var(--sectionPad);
+      background-color: var(--secondary01);
+      grid-column: 1 / 5;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-template-rows: auto;
+      .panel {
+        grid-row: 1;
+        grid-column: 2 / 4;
+        display: flex;
+        justify-content: space-between;
+        .text {
+          width: 50vw;
+        }
+        .navigation {
+          margin-top: auto;
+          display: flex;
+          gap: var(--space-2xs);
+          button {
+            /* background-color: red; */
+            width: var(--space-l-xl);
+            padding: 10%;
+            aspect-ratio: 1 / 1;
+            border-radius: 1000px;
+
+            .icon {
+              mask-image: url(../icons/arrow-left.svg);
+              mask-repeat: no-repeat;
+              mask-size: contain;
+              mask-position: center;
+              height: 100%;
+              width: 100%;
+            }
+
+            &#finProj-navBack {
+              background-color: var(--primary03);
+              .icon {
+                background-color: var(--secondary02);
+                transform: scale(80%);
+              }
+            }
+            &#finProj-navNext {
+              background-color: var(--primary01);
+              .icon {
+                background-color: var(--primary03);
+
+                transform: scaleX(-100%) scale(80%);
+              }
+            }
+          }
+        }
+      }
+
+      .scroller {
+        grid-row: 2;
+        grid-column: 1 / 5;
+        display: grid;
+        /*coy idea*/
+    }
+
+    @media (max-width: 880px) {
+      .toExpect {
+        grid-template-columns: 1fr;
+        grid-template-rows: 40vh auto;
+        margin: 0;
+
+        .styledImg {
+          margin: 0;
+        }
+        .text {
+          margin-top: var(--space-m);
+        }
+      }
+    }
+  </style>
+</Layout>
