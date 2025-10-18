@@ -65,7 +65,7 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
         button {
           /* background-color: red; */
           width: var(--space-l-xl);
-          padding: 10%;
+          /* padding: 10%; */
           aspect-ratio: 1 / 1;
           border-radius: 1000px;
 
@@ -82,15 +82,29 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
             background-color: var(--primary03);
             .icon {
               background-color: var(--secondary02);
-              transform: scale(80%);
+              transform: scale(70%);
             }
+            &:hover {
+              background-color: var(--secondary02);
+              .icon {
+                background-color: var(--primary03);
+                transform: scale(80%);
+              }
+            }
+            border: 1px solid var(--primary03);
           }
           &#finProj-navNext {
             background-color: var(--primary01);
             .icon {
               background-color: var(--primary03);
 
-              transform: scaleX(-100%) scale(80%);
+              transform: scaleX(-100%) scale(70%);
+            }
+            &:hover {
+              background-color: #ffe5a2;
+              .icon {
+                transform: scaleX(-100%) scale(80%);
+              }
             }
           }
         }
@@ -149,9 +163,59 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
       }
     }
   }
+  @media (max-width: 880px) {
+    .projections {
+      .panel {
+        /* position: relative; */
+        flex-direction: column;
+        .text {
+          width: 100%;
+        }
+        .navigation {
+          position: absolute;
+          left: 0;
+          /* top: 50vh; */
+          /* transform: scale(120%); */
+          /* margin-top: var(--space-xs); */
+          width: 100%;
+          justify-content: space-between;
+          button {
+            width: height;
+            padding: 0;
+            aspect-ratio: 1 / 1;
+            scale: 110%;
+            .icon {
+              height: 100%;
+              width: 100%;
+            }
+            &#finProj-navBack {
+              /* margin-left: auto; */
+              /* transform: translateX(calc(var(--space-s) * -1)); */
+              margin-left: 10vw;
+              filter: drop-shadow(0px 0px 1px #ffffffb0);
+            }
+            &#finProj-navNext {
+              /* margin-right: auto; */
+              /* transform: translateX(var(--space-s)); */
+              margin-right: 10vw;
+            }
+          }
+        }
+      }
+      ul.scroller {
+        li.projectEntry {
+          p {
+            margin-bottom: var(--space-m);
+          }
+        }
+      }
+    }
+  }
 </style>
 
 <script>
+  import { set } from "astro:schema";
+
   let activeEntry = 0;
   const scroller = document.querySelector(".scroller") as HTMLElement;
   const measurestick = document.querySelector(".measurestick") as HTMLElement;
@@ -160,16 +224,45 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
   ) as HTMLElement;
   const projectEntries =
     document.querySelectorAll<HTMLElement>(".projectEntry");
+
+  //knapper:
+  const navigation = document.querySelector(".navigation") as HTMLElement;
+  const navBack = document.getElementById("finProj-navBack") as HTMLElement;
+  const navNext = document.getElementById("finProj-navNext") as HTMLElement;
   // as HTMLElement; så jeg ikke får røde linjer - irriterede mig personligt.
+
+  navBack.addEventListener("click", () => {
+    if (activeEntry > 0) {
+      activeEntry--;
+      toggleActiveEntry(activeEntry);
+    }
+  });
+
+  navNext.addEventListener("click", () => {
+    if (activeEntry < projectEntries.length - 1) {
+      activeEntry++;
+      toggleActiveEntry(activeEntry);
+    }
+  });
+
+  let marginToApply = 0;
 
   function applyEntryWidth() {
     //hvis vindue bredde er mindre end 660:
-    const marginToApply = measurestick.clientWidth;
+    marginToApply = measurestick.clientWidth;
     let widthToApply;
+
+    function setNavPosition() {
+      const scrollerRect = scroller.getBoundingClientRect();
+      const navigationGoTo =
+        scrollerRect.top + window.scrollY + scroller.clientHeight * 0.9;
+      navigation.style.top = navigationGoTo + "px";
+    }
 
     if (window.innerWidth < 660) {
       widthToApply = innerMeasurestick.clientWidth * 2;
       scroller.style.gap = marginToApply + "px";
+      setNavPosition();
     } else if (window.innerWidth < 880) {
       widthToApply = innerMeasurestick.clientWidth;
       scroller.style.removeProperty("gap");
@@ -186,22 +279,27 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
         i === projectEntries.length - 1 ? marginToApply + "px" : "0";
       //hvis entry er længden - 1 (det sidste) sættes marginToApply til højre
 
-      projectEntry.addEventListener("click", () => {
-        activeEntry = i;
-        console.log("activeEntry: ", activeEntry);
-        projectEntries.forEach((projectEntry, i) => {
-          projectEntry.classList.remove("active");
-          if (i === activeEntry) {
-            projectEntry.classList.add("active");
-            let scrollLeft = projectEntry.offsetLeft - marginToApply;
-            scroller.scrollTo({
-              left: scrollLeft,
-              top: 0,
-              behavior: "smooth",
-            });
-          }
+      projectEntry.addEventListener("click", () => toggleActiveEntry(i));
+    });
+  }
+
+  function toggleActiveEntry(i: number) {
+    activeEntry = i;
+    console.log("activeEntry: ", activeEntry);
+
+    projectEntries.forEach((projectEntry, j) => {
+      projectEntry.classList.remove("active");
+
+      if (j === activeEntry) {
+        projectEntry.classList.add("active");
+
+        const scrollLeft = projectEntry.offsetLeft - marginToApply;
+        scroller.scrollTo({
+          left: scrollLeft,
+          top: 0,
+          behavior: "smooth",
         });
-      });
+      }
     });
   }
 
