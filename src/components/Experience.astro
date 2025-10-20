@@ -15,7 +15,10 @@ console.log(experienceData);
       {
         experienceData.stats.map((experience) => (
           <div class="experience">
-            <div classy="graph">
+            <div class="graph">
+              <div class="stat" style={`--percent: ${experience.value}`} />
+              {/* <div class="stat" style="--percent: 0" /> */}
+
               <p class="value">{experience.value}%</p>
             </div>
             <p class="label">{experience.label}</p>
@@ -61,7 +64,7 @@ console.log(experienceData);
 
       .experience {
         width: 100%;
-                  height: auto;
+        height: auto;
         aspect-ratio: 1 / 1.1;
         /* background-color: var(--secondary02); */
 
@@ -69,15 +72,54 @@ console.log(experienceData);
           position: relative;
           width: 100%;
           height: auto;
+          /* background-color: red; */
 
-          aspect-ratio: 1 / 1;
+          aspect-ratio: 1;
 
-          .value {
+          > * {
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: var(--step-4);
             font-weight: 700;
+          }
+          .stat {
+            /* width: 150px; */
+            width: 80%;
+            --actualPercent: calc(
+              var(--percent) * 1%
+            ); /*konverter til procent*/
+            --border-width: var(--space-3xs-2xs);
+            aspect-ratio: 1;
+            border-radius: calc(Infinity * 1px);
+            /* haha, meget sjovt, minecraft diagram!!!1!:  */
+            /* border-radius: 0; */
+
+            border: var(--border-width) solid transparent;
+            background:
+              conic-gradient(#fbc336 0 0) padding-box,
+              conic-gradient(
+                  var(--secondary02) var(--actualPercent),
+                  rgba(0, 0, 0, 0.219) 0
+                )
+                border-box;
+
+            display: grid;
+            counter-reset: c var(--percent);
+
+            &::before {
+              content: "";
+              aspect-ratio: 1;
+              --border-width: var(--space-3xs);
+              border: var(--border-width) solid var(--secondary02);
+              border-radius: calc(Infinity * 1px);
+              width: var(--space-s-m);
+              background: var(--primary03);
+              offset-path: border-box;
+              offset-distance: var(--actualPercent);
+              offset-anchor: 50% calc(50%-var(--border-width) / 2);
+            }
           }
         }
 
@@ -86,6 +128,42 @@ console.log(experienceData);
           margin-top: auto;
           text-align: center;
           font-size: var(--step-1);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1350px) {
+    section.experience {
+      .content {
+        height: auto;
+        min-height: 30vh;
+
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  @media (max-width: 660px) {
+    section.experience {
+      --sectionPad: 15vw 0;
+    }
+  }
+
+  @media (max-width: 590px) {
+    section.experience {
+      .content {
+        align-items: center;
+        .text {
+          width: 100%;
+        }
+        .experiences {
+          margin-top: var(--space-l);
+          width: 60vw;
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          gap: var(--space-xl);
         }
       }
     }

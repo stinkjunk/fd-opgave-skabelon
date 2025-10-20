@@ -68,7 +68,7 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
           /* background-color: red; */
           width: var(--space-l-xl);
           /* padding: 10%; */
-          aspect-ratio: 1 / 1;
+          aspect-ratio: 1;
           border-radius: 1000px;
 
           .icon {
@@ -163,7 +163,7 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
         .icon {
           background-color: var(--primary03);
           height: var(--space-m-l);
-          aspect-ratio: 1 / 1;
+          aspect-ratio: 1;
           margin-bottom: var(--space-s);
           mask-repeat: no-repeat;
           mask-size: contain;
@@ -211,7 +211,7 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
           button {
             width: height;
             padding: 0;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 1;
             scale: 110%;
             .icon {
               height: 100%;
@@ -244,6 +244,12 @@ console.log("FinancialProjectionsData: ", FinancialProjectionsData);
           }
         }
       }
+    }
+  }
+
+  @media (max-width: 660px) {
+    .projections{
+     padding-bottom: var(--space-3xl);
     }
   }
 </style>
