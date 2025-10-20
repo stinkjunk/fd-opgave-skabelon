@@ -5,34 +5,35 @@ console.log(experienceData);
 ---
 
 <section class="experience">
-    <div class="content">
+  <div class="content">
     <div class="text">
-        <p class="caps">Experience</p>
-        <h1>{experienceData.heading}</h1>
-        <p>{experienceData.subheading}</p>
+      <p class="caps">Experience</p>
+      <h1>{experienceData.heading}</h1>
+      <p>{experienceData.subheading}</p>
     </div>
-    </div>
-
+  </div>
 </section>
 
 <style>
-    .experience {
+  .experience {
+    padding: var(--sectionPad);
+    grid-column: 1 / 5;
 
-        padding: var(--sectionPad);
-        grid-column:  1 / 5;
+    display: grid;
+    grid-template-columns: subgrid;
+    background-color: #fbc336;
+    --textcol1: var(--primary03);
 
-        display: grid;
-        grid-template-columns: subgrid;
-        background-color: #FBC336;
-        --textcol1: var(--primary03);
+    .content {
+      grid-column: 2 / 4;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
 
-        .content {
-            grid-column: 2 / 4;
-        }
+      .text {
+        grid-column: 1;
+      }
     }
-
+  }
 </style>
 
-<script> 
-
-</script>
+<script></script>
