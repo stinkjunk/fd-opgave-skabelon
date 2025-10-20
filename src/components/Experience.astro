@@ -15,7 +15,9 @@ console.log(experienceData);
       {
         experienceData.stats.map((experience) => (
           <div class="experience">
-            <p class="value">{experience.value}%</p>
+            <div classy="graph">
+              <p class="value">{experience.value}%</p>
+            </div>
             <p class="label">{experience.label}</p>
           </div>
         ))
@@ -59,24 +61,29 @@ console.log(experienceData);
 
       .experience {
         width: 100%;
-        height: auto;
-        aspect-ratio: 1 / 1;
+                  height: auto;
+        aspect-ratio: 1 / 1.1;
         /* background-color: var(--secondary02); */
-        position: relative;
-        > * {
-          position: absolute;
-          font-family: "Cabin", sans-serif;
-        }
-        .value {
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: var(--step-4);
-          font-weight: 700;
-        }
-        .label {
-          bottom: 0;
+
+        .graph {
+          position: relative;
           width: 100%;
+          height: auto;
+
+          aspect-ratio: 1 / 1;
+
+          .value {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: var(--step-4);
+            font-weight: 700;
+          }
+        }
+
+        .label {
+          font-family: "Cabin", sans-serif;
+          margin-top: auto;
           text-align: center;
           font-size: var(--step-1);
         }
