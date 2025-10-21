@@ -1,0 +1,190 @@
+---
+
+---
+
+<section class="contact">
+  <div class="content">
+    <div class="info">
+      <div>
+        <p class="caps">Process</p>
+        <h1>Contact Us. It's Easy.</h1>
+        <p>
+          Leverage agile frameworks to provide a robust synopsis for high level
+          overviews. Iterative approaches to corporate strategy foster
+          collaborative.
+        </p>
+      </div>
+      <ul class="contacts">
+        <li class="contact">
+          <div class="icon phone"><div></div></div>
+          <div class="contactInformation">
+            <p>Call Today</p>
+            <a href="#" target="_blank">+1 800 100 900</a>
+          </div>
+        </li>
+
+        <li class="contact">
+          <div class="icon clock"><div></div></div>
+          <div class="contactInformation">
+            <p>Monday To Friday</p>
+            <a href="#" target="_blank">9 AM - 5 PM</a>
+          </div>
+        </li>
+
+        <li class="contact">
+          <div class="icon pin"><div></div></div>
+          <div class="contactInformation">
+            <p>USA Office</p>
+            <a href="#" target="_blank">
+              195 Devonshire St, Boston, MA 02110
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="imgGrid">
+      <img src="/images/contacSecImg1.webp" alt="1" />
+      <img src="/images/contacSecImg2.webp" alt="2" />
+      <img src="/images/contacSecImg3.webp" alt="3" />
+    </div>
+  </div>
+  <style>
+    section.contact {
+      padding: var(--sectionPad);
+      grid-column: 1 / 5;
+      display: grid;
+      grid-template-columns: subgrid;
+      position: relative;
+
+      .content {
+        grid-column: 2 / 4;
+        display: grid;
+        grid-template-columns: 1.5fr 2fr;
+        gap: var(--space-2xl);
+        .info {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-m);
+
+          ul.contacts {
+            /* flex-grow: 1; */
+            margin: auto 0;
+            gap: var(--space-xl);
+            padding: 0;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            li.contact {
+              list-style: none;
+              display: flex;
+              .icon {
+                height: 100%;
+                aspect-ratio: 1;
+                border-radius: 1000px;
+                margin-right: var(--space-s);
+                div {
+                  mask-size: contain;
+                  mask-position: center;
+                  mask-repeat: no-repeat;
+                  height: 100%;
+                  width: 100%;
+                  aspect-ratio: 1;
+                  transform: scale(0.5);
+                }
+                &.phone {
+                  background-color: #ffecbb;
+                  div {
+                    background-color: #deaa27;
+                    mask-image: url(../icons/phone.svg);
+                  }
+                }
+                &.clock {
+                  background-color: #a4eda4;
+                  div {
+                    background-color: #4eaf4e;
+                    mask-image: url(../icons/clock.svg);
+                  }
+                }
+                &.pin {
+                  background-color: #eaeaea;
+                  div {
+                    background-color: #181818;
+                    mask-image: url(../icons/pin.svg);
+                  }
+                }
+              }
+              .contactInformation {
+                height: 100%;
+                a {
+                  font-family: "Cabin", sans-serif;
+                  font-size: var(--step-0);
+                  font-weight: 600;
+                  color: var(--primary03);
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+        }
+        .imgGrid {
+          padding: var(--space-m);
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr 1fr;
+          gap: 1.25cqw;
+          img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-radius: 28px;
+
+            &:first-child {
+              grid-column: 1;
+              grid-row: span 2;
+            }
+            &:not(:first-child) {
+              grid-column: 2;
+            }
+          }
+
+          position: relative;
+
+          &::before {
+            z-index: -1;
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            aspect-ratio: 1 / 1;
+            background-image: url(../icons/pattern.svg);
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+          }
+          &::after {
+            z-index: -1;
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40%;
+            aspect-ratio: 1 / 0.55;
+
+            background-color: var(--primary02);
+            border-radius: 20px;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 1200px) {
+      section.contact {
+        .content {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+  </style>
+</section>
