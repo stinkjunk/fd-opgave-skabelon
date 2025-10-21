@@ -6,7 +6,8 @@
   --headerInnerWidth: 85vw;
   --outerPadding: minmax(20px, 0.3fr);
   --padGrid: var(--outerPadding) 1fr 1fr var(--outerPadding);
-  --sectionPad: 15% 0;
+  --sectionPad: 20vh 0;
+  /* --sectionPad: 15% 0; */
 
   /*farvevariabler*/
   --primary01: #ffcc4a;
@@ -17,6 +18,9 @@
   --secondary02: #ffffff;
 
   --textcol1: #595566;
+  --textcol2: var(--primary03);
+
+  
 
   /*utopia font size calc*/
   --step--2: clamp(0.7813rem, 0.7736rem + 0.0341vw, 0.8rem);
@@ -66,6 +70,7 @@ h4,
 .title {
   font-family: "Cabin", sans-serif;
   font-weight: 600;
+  color: var(--textcol2);
   /* color: var(--primary03) */
 }
 
@@ -83,6 +88,8 @@ h2 {
 
 .caps {
   text-transform: uppercase;
+    color: var(--textcol2);
+
 
   /* color: var(--primary03); */
 }
