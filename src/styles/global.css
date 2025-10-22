@@ -20,8 +20,6 @@
   --textcol1: #595566;
   --textcol2: var(--primary03);
 
-  
-
   /*utopia font size calc*/
   --step--2: clamp(0.7813rem, 0.7736rem + 0.0341vw, 0.8rem);
   --step--1: clamp(0.9375rem, 0.9119rem + 0.1136vw, 1rem);
@@ -74,6 +72,12 @@ h4,
   /* color: var(--primary03) */
 }
 
+a.title {
+  color: var(--secondary02) !important;
+  font-size: var(--step-1) !important;
+  margin: 0 !important;
+}
+
 h1 {
   font-size: var(--step-4);
 }
@@ -88,8 +92,7 @@ h2 {
 
 .caps {
   text-transform: uppercase;
-    color: var(--textcol2);
-
+  color: var(--textcol2);
 
   /* color: var(--primary03); */
 }

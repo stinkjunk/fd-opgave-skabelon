@@ -78,11 +78,7 @@ const { title } = Astro.props;
           justify-content: space-between;
           align-items: center;
           flex-shrink: 0;
-          a.title {
-            color: var(--secondary02);
-            font-size: var(--step-1);
-            margin: 0;
-          }
+
           ul.menu-bar {
             padding: 0;
             display: flex;
@@ -215,6 +211,31 @@ const { title } = Astro.props;
           }
         }
       }
+
+      footer#footer {
+        background-color: var(--primary03);
+        --textcol1: var(--secondary02);
+        --textcol2: var(--secondary02);
+        padding: var(--space-m) 0;
+
+        display: grid;
+        grid-template-columns: var(--padGrid);
+
+        & > * {
+          grid-column: 2 / 4;
+          width: 100%;
+          text-align: center;
+        }
+
+        a.title {
+          padding-bottom: var(--space-m);
+          border-bottom: 1px solid #707070;
+        }
+
+        p {
+          margin-top: var(--space-m);
+        }
+      }
     </style>
   </head>
   <body>
@@ -277,6 +298,14 @@ const { title } = Astro.props;
       <slot />
       <Newsletter />
     </main>
+
+    <footer id="footer">
+      <a class="title" href="#">AskExperts</a>
+      <p>
+        ©2025 Consultalk. All rights reserved | Terms of Service | Privacy
+        Policy
+      </p>
+    </footer>
     <script is:inline>
       const logIn = document.getElementById("logIn");
       const logInProxies = document.querySelectorAll(".logIn");
