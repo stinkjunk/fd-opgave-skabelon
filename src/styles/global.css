@@ -146,6 +146,10 @@ li:not(.caps):not(.title) {
   }
 }
 
+p.small {
+  font-size: var(--step--2)
+}
+
 /*image wrapper:*/
 .wrapper:has(img) {
   position: relative;
