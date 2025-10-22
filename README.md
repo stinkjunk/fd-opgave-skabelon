@@ -1,82 +1,82 @@
-# Opgaveskabelon til Frontend Design tema på Frontend-valgfaget
+# Implemeter et Figma-design
 
-Se opgavebeskrivelsen på Fronter.
+Af Magnus Krahl
 
-## Medfølgende Data
+## Reflektioner
 
-Der medfølger indholdsdata i form af lokale JSON-filer, som du kan bruge til din opgave. Det er ikke et krav til opgaven, men det kan gøre det nemmere og hurtigere at få tekst og billeder ind i dit projekt.
 
-Bemærk, at CaseStudy-siden allerede inkluderer data fra en lokal JSON-fil.
+### 1. At være mindre perfektionistisk
+Har lært mig den strategiske værdi i at kompletgøre projektet "barebones", i stedet for at  style hvert element til perfektion. Det var dette jeg havde gjort, og på trods af en ret god forside, så mangler resten af siderne.
 
-Dokumentationen til anvendelsen af dataene finder du på: [https://frontend-design-theme.netlify.app/](https://frontend-design-theme.netlify.app/).
+### 2. DOM-elementer som målestokke
+Har lært at bruge DOM-elementer som målestokke, ie. at intoducere elementer kun for at måle en dynamisk bredde (defineret i CSS) i JS. Eksempel:
+```html
+<!-- Fra FinancialProjections.astro: -->
 
-Her er et eksempel på, hvordan du kan bruge dataene i dine Astro-komponenter:
+  <div class="measurestick"></div>
+  <div class="measurestickInner"></div>
+```
+Disse div'er bliver automatisk sat ind i det dynamiske grid-system `--padGrid:` som er defineret i `global.css`:
+```css
+/*Fra Global.css:*/
 
-```astro
-import employees from "@data/employees.json";
-
-console.log(employees);
+  --outerPadding: minmax(20px, 0.3fr);
+  --padGrid: var(--outerPadding) 1fr 1fr var(--outerPadding);
 ```
 
-## Brug af hjælpekomponenter
+`.measurestick` og `.measurestickInner` bliver derefter tilgængelige i JS, for at måle de nuværende bredder af kolonnerne i `--padGrid`:
+```javascript
+// I <script /> delen af FinancialProjections.astro:
 
-### DynamicImage.astro
+  const measurestick = document.querySelector(".measurestick") as HTMLElement;
+  const innerMeasurestick = document.querySelector(
+    ".measurestickInner"
+  ) as HTMLElement;  
+```
+Og her ses "målestok"-div'erne anvendt:
+```javascript
+// I <script /> delen af FinancialProjections.astro:
 
-Brug denne komponent til at vise billeder dynamisk fra lokale datafiler. Du skal blot sende stien fra datasættet direkte til komponenten.
+  function applyEntryWidth() {
+    //hvis vindue bredde er mindre end 660:
+    marginToApply = measurestick.clientWidth;
+    let widthToApply;
 
-Eksempel med data:
+    if (window.innerWidth < 660) {
+      widthToApply = innerMeasurestick.clientWidth * 2;
+      scroller.style.gap = marginToApply + "px";
+      setNavPosition();
+    } else if (window.innerWidth < 880) {
+      widthToApply = innerMeasurestick.clientWidth;
+      scroller.style.removeProperty("gap");
+    } else {
+      widthToApply = (innerMeasurestick.clientWidth * 2) / 3;
+      scroller.style.removeProperty("gap");
+    }
 
-```astro
-{employees.map((employee) => (
-  <DynamicImage
-    imagePath={employee.img}
-    altText={employee.name}
-    width={200}
-    height={200}
-  />
-))}
+    projectEntries.forEach((projectEntry, i) => {
+      projectEntry.style.width = widthToApply + "px"; //sætter bredden til alle elementer
+      projectEntry.style.marginLeft = i === 0 ? marginToApply + "px" : "0"; //hvis entry er
+      //den første sættes marginToApply til venstres
+      projectEntry.style.marginRight =
+        i === projectEntries.length - 1 ? marginToApply + "px" : "0";
+      //hvis entry er længden - 1 (det sidste) sættes marginToApply til højre
+
+      projectEntry.addEventListener("click", () => toggleActiveEntry(i));
+    });
+  }
+
 ```
 
-### DynamicIcon.astro
+## Tekniske problemer
+Har desuden haft nogle tekniske problemer som har forhindret mig i at færdiggøre mere af opgaven.
 
-`DynamicIcon` bruges til at vise SVG-ikoner dynamisk baseret på et navn fra dine data.
+### 1. Problemer med min hjemmecomputer
+Min IDE (VSCodium på Linux) har haft en mærkelig tendens til at afinstallere sig selv, og når geninstalleret, har medført stort besvær i at få npm til at virke. En anden gang døde internettet i vores bygning. I begge tilfælde har jeg været tvunget til at bruge min bærbare (VSCode på Windows), hvilket har medført sine egne problemer:
 
-Eksempel med data:
+### 2. Utrolig langsomhed på min bærbar
+Det har været nær umuligt at bruge min bærbare, da den er så langsom, at det vitterligt tager en evighed at få genindlæst siden for at checke min nye kode. Ikke kun det, men det tager cirka 15 sekunder for at indlæse den figma fil vi skulle efterligne, og så lidt ekstra for at langsomt zoome ind på den komponent jeg ønsker at arbejde med.
 
-```astro
-{employee.social_links.map((link) => (
-  <DynamicIcon name={link.icon} />
-))}
-```
+Disse er selvfølgelige mine egne problemer som jeg vil prioritere at løse, men har hverken haft tiden eller pengene til at gøre det mens jeg har lavet denne opgave.
 
-Her vises et ikon for hvert socialt medie, hvor `icon`-feltet matcher filnavnet på SVG-ikonet i `src/icons/`.
 
-### HeroBgWrapper.astro
-
-HeroBgWrapper bruges til Hero-sektioner på diverse undersider. Brug `imagePath` til at angive baggrundsbilledet. Du skal selv hente billederne fra Figma og lægge dem i mappen `src/assets/images`. Henvis derefter kun til filnavnet (f.eks. 'case.webp').
-
-Alt markup du placerer mellem <HeroBgWrapper> og </HeroBgWrapper> bliver vist ovenpå baggrunden.
-
-Eksempel:
-
-```astro
-<HeroBgWrapper imagePath="case.webp" class="hero-bg">
-  <h1>Din overskrift</h1>
-</HeroBgWrapper>
-```
-
-Du kan tilføje ekstra styling via `class` eller `style`-props, og alt indhold mellem tags bliver vist ovenpå baggrunden.
-
----
-
-## Import af SVG-ikoner direkte
-
-Du kan også importere SVG-ikoner direkte i dine komponenter, hvis du ønsker mere kontrol eller styling:
-
-```astro
-import Checkmark from "@icons/checkmark.svg";
-
-<Checkmark width={32} height={32} class="my-icon" />
-```
-
-Se evt. `src/pages/svgs.astro` for flere eksempler på direkte import og brug af SVG-ikoner.
